@@ -7,5 +7,5 @@ import lombok.Data;
 @Data
 public class EventDocumentation {
 
-    private String docs;
+    private String dataTemplate;
 }

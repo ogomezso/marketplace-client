@@ -1,35 +1,33 @@
 package es.santander.marketplace.client.filehandler;
 
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.databind.DatabindException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import es.santander.marketplace.client.config.AppConfig;
 import es.santander.marketplace.client.model.topic.Project;
 import es.santander.marketplace.client.model.topic.Topic;
 import es.santander.marketplace.client.model.topic.TopicTopology;
-import es.santander.marketplace.client.rest.client.RegistrationClient;
 import es.santander.marketplace.client.rest.client.SchemaRegistryClient;
-import es.santander.marketplace.client.rest.client.SubscriptionClient;
 import es.santander.marketplace.client.rest.mapper.RegisterRequestMapper;
 import es.santander.marketplace.client.rest.mapper.SubscriptionRequestMapper;
 import es.santander.marketplace.client.rest.model.SchemaResponse;
 import es.santander.marketplace.client.rest.model.Subscription;
 import es.santander.marketplace.client.rest.model.TopicRegistration;
-import jakarta.ws.rs.core.Response;
 
 public class TopologyFileProcessor {
 
     private final YamlToPojo yamlToPojo = new YamlToPojo();
+    private final ObjectMapper fileMapper = new ObjectMapper();
     private final RegisterRequestMapper registerRequestMapper = new RegisterRequestMapper();
     private final SubscriptionRequestMapper subscriptionRequestMapper = new SubscriptionRequestMapper();
 
-    private final RegistrationClient registrationClient = new RegistrationClient();
-    private final SubscriptionClient subscriptionClient = new SubscriptionClient();
-    private final SchemaRegistryClient schemaRegistryClient = new SchemaRegistryClient();
+        private final SchemaRegistryClient schemaRegistryClient = new SchemaRegistryClient();
 
     private final AppConfig appConfig;
     private final TopicTopology topology;
@@ -57,39 +55,31 @@ public class TopologyFileProcessor {
 
     private void processTopic(String projectName, Topic topic) {
 
-        SchemaResponse schema = schemaRegistryClient.getSchemaInfo(appConfig, topic.getName());
-        System.out.println(schema);
+        String subject = topic.getName()+"-value";
+        SchemaResponse schema = schemaRegistryClient.getSchemaInfo(appConfig, subject);
         TopicRegistration topicRegistration = registerRequestMapper.toRequest(projectName, topic, schema);
-        System.out.println(topicRegistration);
 
-        List<Subscription> subscriptions = topic.getProducers().stream()
+        List<Subscription> producerSubscriptions = topic.getProducers().stream()
                 .map(producer -> subscriptionRequestMapper.toProducerSubscription(topic.getName(), producer))
                 .collect(Collectors.toList());
 
         List<Subscription> consumerSubscriptions = topic.getConsumers().stream()
                 .map(consumer -> subscriptionRequestMapper.toConsumerSubscription(topic.getName(), consumer)).toList();
 
-        subscriptions.addAll(consumerSubscriptions);
+        createJsonFile(topic.getName(), topicRegistration);
 
-        Response topicRegistrationResponse = registrationClient.registerNewTopic(topicRegistration, appConfig);
+        producerSubscriptions.forEach(producer -> createJsonFile(
+                producer.getSubscriptionType() + "_" + producer.getAppkey() + "_" + producer.getTopicName(), producer));
+        consumerSubscriptions.forEach(consumer -> createJsonFile(consumer.getSubscriptionType() + "_"
+                + consumer.getAppkey() + "_" + consumer.getTopicName() + "_" + consumer.getConsumerGroup(), consumer));
+    }
 
-        Integer responseStatus = topicRegistrationResponse.getStatus();
-
-        if (responseStatus >= 200 && responseStatus <= 299) {
-            System.out.println("topic registered");
-        } else {
-            System.out.println("Topic Registration Error: " + responseStatus);
+    private void createJsonFile(String filename, Object pojo) {
+        try {
+            fileMapper.writeValue(Paths.get(filename + ".json").toFile(), pojo);
+        } catch (IOException e) {
+            System.out.println("Error processing registration file");
+            e.printStackTrace();
         }
-
-        subscriptions.forEach(subscription -> {
-            Response subsResponse = subscriptionClient.createNewTopicSubscription(subscription, appConfig);
-            Integer subsResponseStatus = subsResponse.getStatus();
-
-            if (subsResponseStatus >= 200 && subsResponseStatus <= 299) {
-                System.out.println("Subscription Created");
-            } else {
-                System.out.println("Subs error: " + subsResponseStatus);
-            }
-        });
     }
 }

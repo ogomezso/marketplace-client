@@ -4,8 +4,11 @@ import lombok.Data;
 
 @Data
 public class AppConfig {
-    private String marketPlaceUrl;
     private String schemaRegistryUrl;
-    private String registrationEndpoint;
-    private String subscriptionEndpoint;
+    private String schemaRegistryUser;
+    private String schemaRegistryPassword;
+    private String schemaRegistryTrustStorePath;
+    private String schemaRegistryTrustStorePassword;
+    private String schemaRegistryKeyStorePath;
+    private String schemaRegistryKeyStorePassword;
 }
