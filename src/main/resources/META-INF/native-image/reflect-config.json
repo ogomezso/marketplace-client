@@ -99,6 +99,7 @@
   "queryAllDeclaredConstructors":true,
   "methods":[
     {"name":"<init>","parameterTypes":[] }, 
+    {"name":"setDumpFilePath","parameterTypes":["java.lang.String"] }, 
     {"name":"setSchemaRegistryKeyStorePassword","parameterTypes":["java.lang.String"] }, 
     {"name":"setSchemaRegistryKeyStorePath","parameterTypes":["java.lang.String"] }, 
     {"name":"setSchemaRegistryPassword","parameterTypes":["java.lang.String"] }, 

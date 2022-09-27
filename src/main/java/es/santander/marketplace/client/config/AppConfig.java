@@ -11,4 +11,6 @@ public class AppConfig {
     private String schemaRegistryTrustStorePassword;
     private String schemaRegistryKeyStorePath;
     private String schemaRegistryKeyStorePassword;
+    private String dumpEventsFilePath;
+    private String dumpSubscriptionsFilePath;
 }

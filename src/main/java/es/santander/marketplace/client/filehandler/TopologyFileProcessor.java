@@ -1,6 +1,9 @@
 package es.santander.marketplace.client.filehandler;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,7 +22,9 @@ import es.santander.marketplace.client.rest.mapper.SubscriptionRequestMapper;
 import es.santander.marketplace.client.rest.model.SchemaResponse;
 import es.santander.marketplace.client.rest.model.Subscription;
 import es.santander.marketplace.client.rest.model.TopicRegistration;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class TopologyFileProcessor {
 
     private final YamlToPojo yamlToPojo = new YamlToPojo();
@@ -27,7 +32,7 @@ public class TopologyFileProcessor {
     private final RegisterRequestMapper registerRequestMapper = new RegisterRequestMapper();
     private final SubscriptionRequestMapper subscriptionRequestMapper = new SubscriptionRequestMapper();
 
-        private final SchemaRegistryClient schemaRegistryClient = new SchemaRegistryClient();
+    private final SchemaRegistryClient schemaRegistryClient = new SchemaRegistryClient();
 
     private final AppConfig appConfig;
     private final TopicTopology topology;
@@ -55,9 +60,12 @@ public class TopologyFileProcessor {
 
     private void processTopic(String projectName, Topic topic) {
 
-        String subject = topic.getName()+"-value";
+        String subject = topic.getName() + "-value";
         SchemaResponse schema = schemaRegistryClient.getSchemaInfo(appConfig, subject);
         TopicRegistration topicRegistration = registerRequestMapper.toRequest(projectName, topic, schema);
+
+        createFolderIfNotExists(appConfig.getDumpEventsFilePath());
+        createFolderIfNotExists(appConfig.getDumpSubscriptionsFilePath());
 
         List<Subscription> producerSubscriptions = topic.getProducers().stream()
                 .map(producer -> subscriptionRequestMapper.toProducerSubscription(topic.getName(), producer))
@@ -66,12 +74,16 @@ public class TopologyFileProcessor {
         List<Subscription> consumerSubscriptions = topic.getConsumers().stream()
                 .map(consumer -> subscriptionRequestMapper.toConsumerSubscription(topic.getName(), consumer)).toList();
 
-        createJsonFile(topic.getName(), topicRegistration);
+        createJsonFile(appConfig.getDumpEventsFilePath() + topic.getName(), topicRegistration);
 
         producerSubscriptions.forEach(producer -> createJsonFile(
-                producer.getSubscriptionType() + "_" + producer.getAppkey() + "_" + producer.getTopicName(), producer));
-        consumerSubscriptions.forEach(consumer -> createJsonFile(consumer.getSubscriptionType() + "_"
-                + consumer.getAppkey() + "_" + consumer.getTopicName() + "_" + consumer.getConsumerGroup(), consumer));
+                appConfig.getDumpSubscriptionsFilePath() + producer.getSubscriptionType() + "_" + producer.getAppkey() + "_"
+                        + producer.getTopicName(),
+                producer));
+        consumerSubscriptions.forEach(consumer -> createJsonFile(
+                appConfig.getDumpSubscriptionsFilePath() + consumer.getSubscriptionType() + "_"
+                        + consumer.getAppkey() + "_" + consumer.getTopicName() + "_" + consumer.getConsumerGroup(),
+                consumer));
     }
 
     private void createJsonFile(String filename, Object pojo) {
@@ -81,5 +93,15 @@ public class TopologyFileProcessor {
             System.out.println("Error processing registration file");
             e.printStackTrace();
         }
+    }
+
+    private void createFolderIfNotExists(String path){
+       Path dir = Paths.get(path);
+       try {
+        Files.createDirectories(dir);
+    } catch (IOException e) {
+        log.error("Error creating dump files path");
+        e.printStackTrace();
+    }
     }
 }

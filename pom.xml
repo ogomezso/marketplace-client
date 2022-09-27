@@ -5,7 +5,9 @@
   <packaging>jar</packaging>
   <version>0.1.0</version>
   <name>marketplace-client</name>
-  <url>http://maven.apache.org</url>
+  <inceptionYear>2022</inceptionYear>
+  <url>https://github.com/ogomezso/marketplace-api-client</url>
+  <description>Marketplace Client</description>
 
   <properties>
     <java.version>17</java.version>
@@ -253,38 +255,240 @@
               <Build-OS>${os.name} ${os.arch} ${os.version}</Build-OS>
             </manifestEntries>
             <manifest>
-              <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
               <addClasspath>true</addClasspath>
               <classpathPrefix>libs/</classpathPrefix>
               <mainClass>${mainClass}</mainClass>
+              <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
             </manifest>
           </archive>
         </configuration>
       </plugin>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-assembly-plugin</artifactId>
+        <groupId>org.commonjava.maven.plugins</groupId>
+        <artifactId>directory-maven-plugin</artifactId>
         <executions>
           <execution>
+            <id>resolve-rootdir</id>
+            <goals>
+              <goal>highest-basedir</goal>
+            </goals>
+            <phase>initialize</phase>
+            <configuration>
+              <property>rootdir</property>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>pl.project13.maven</groupId>
+        <artifactId>git-commit-id-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>resolve-git-properties</id>
+            <goals>
+              <goal>revision</goal>
+            </goals>
+            <phase>validate</phase>
+            <configuration>
+              <verbose>false</verbose>
+              <failOnNoGitDirectory>false</failOnNoGitDirectory>
+              <generateGitPropertiesFile>true</generateGitPropertiesFile>
+              <generateGitPropertiesFilename>${project.build.directory}/git.properties
+                  </generateGitPropertiesFilename>
+              <dateFormat>yyyy-MM-dd'T'HH:mm:ssXXX</dateFormat>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>3.0.0-M1</version>
+        <configuration>
+          <useReleaseProfile>false</useReleaseProfile>
+          <releaseProfiles>publication,gpg</releaseProfiles>
+          <autoVersionSubmodules>false</autoVersionSubmodules>
+          <pushChanges>false</pushChanges>
+          <remoteTagging>false</remoteTagging>
+          <tagNameFormat>v@{project.version}</tagNameFormat>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <configuration>
+          <archive>
+            <manifest>
+              <mainClass>${mainClass} </mainClass>
+            </manifest>
+          </archive>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+          <attach>false</attach>
+          <appendAssemblyId>false</appendAssemblyId>
+          <finalName>${project.name}-${project.version}-${os.detected.classifier}</finalName>
+          <outputDirectory>${app.distribution.directory}</outputDirectory>
+          <workDirectory>${project.build.directory}/assembly/work</workDirectory>
+          <skipAssembly>false</skipAssembly>
+        </configuration>
+        <executions>
+          <execution>
+            <id>make-distribution</id>
             <phase>package</phase>
             <goals>
               <goal>single</goal>
             </goals>
-            <configuration>
-              <archive>
-                <manifest>
-                  <mainClass>
-                       ${mainClass}
-                    </mainClass>
-                </manifest>
-              </archive>
-              <descriptorRefs>
-                <descriptorRef>jar-with-dependencies</descriptorRef>
-              </descriptorRefs>
-            </configuration>
           </execution>
         </executions>
       </plugin>
     </plugins>
   </build>
+  <profiles>
+    <profile>
+      <id>native</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.graalvm.nativeimage</groupId>
+            <artifactId>native-image-maven-plugin</artifactId>
+            <version>${graal.version}</version>
+            <configuration>
+              <buildDirectory>bin/</buildDirectory>
+              <imageName>${project.name}</imageName>
+              <mainClass>${mainClass}</mainClass>
+              <buildArgs>
+                <buildArg>--no-fallback</buildArg>
+                <!-- <buildArg>-link-at-build-time</buildArg> -->
+                <buildArg>-H:ReflectionConfigurationFiles=../src/main/resources/META-INF/native-image/reflect-config.json</buildArg>
+                <buildArg>-H:Log=registerResource:3</buildArg>
+                <buildArg>-H:+ReportExceptionStackTraces</buildArg>
+                <buildArg>-H:+PrintClassInitialization</buildArg>
+                <buildArg>-H:ResourceConfigurationFiles=../src/main/resources/META-INF/native-image/resource-config.json</buildArg>
+              </buildArgs>
+              <agent>
+                <options name="periodic-config">
+                  <option>config-write-period-secs=10</option>
+                  <option>config-write-initial-delay-secs=5</option>
+                </options>
+              </agent>
+            </configuration>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>native-image</goal>
+                </goals>
+                <phase>package</phase>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>dist</id>
+      <activation>
+        <property>
+          <name>dist</name>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <configuration combine.self="append">
+              <skipAssembly>false</skipAssembly>
+              <descriptors>
+                <descriptor>src/main/assembly/assembly.xml</descriptor>
+              </descriptors>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>dist-windows</id>
+      <activation>
+        <os>
+          <family>windows</family>
+        </os>
+      </activation>
+      <properties>
+        <executable-suffix>.exe</executable-suffix>
+      </properties>
+    </profile>
+    <profile>
+      <id>release</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.jreleaser</groupId>
+            <artifactId>jreleaser-maven-plugin</artifactId>
+            <version>1.0.0-M2</version>
+            <configuration>
+              <jreleaser>
+                <project>
+                  <name>marketplace-client</name>
+                  <java>
+                    <mainClass>${mainClass}</mainClass>
+                  </java>
+                  <snapshot>
+                    <label>{{ projectVersionNumber }}-early-access</label>
+                  </snapshot>
+                </project>
+                <release>
+                  <github>
+                    <owner>ogomezso</owner>
+                    <name>marketplace-client</name>
+                    <tagName>marketplace-client-v{{projectVersion}}</tagName>
+                    <releaseName>marketplace-client  v{{projectVersion}}</releaseName>
+                    <overwrite>true</overwrite>
+                  </github>
+                </release>
+                <packagers>
+                  <brew>
+                    <active>RELEASE</active>
+                    <continueOnError>true</continueOnError>
+                    <multiPlatform>true</multiPlatform>
+                  </brew>
+                </packagers>
+                <distributions>
+                  <marketplace-client>
+                    <name>marketplace-client</name>
+                    <type>NATIVE_IMAGE</type>
+                    <artifacts>
+                      <artifact>
+                        <path>{{artifactsDir}}/{{distributionName}}-{{projectVersion}}-linux-x86_64.tar.gz</path>
+                        <transform>artifacts/{{distributionName}}-{{projectEffectiveVersion}}-linux-x86_64.tar.gz</transform>
+                        <platform>linux-x86_64</platform>
+                      </artifact>
+                      <artifact>
+                        <path>{{artifactsDir}}/{{distributionName}}-{{projectVersion}}-linux-x86_64.zip</path>
+                        <transform>artifacts/{{distributionName}}-{{projectEffectiveVersion}}-linux-x86_64.zip</transform>
+                        <platform>linux-x86_64</platform>
+                      </artifact>
+                      <artifact>
+                        <path>{{artifactsDir}}/{{distributionName}}-{{projectVersion}}-windows-x86_64.zip</path>
+                        <transform>artifacts/{{distributionName}}-{{projectEffectiveVersion}}-windows-x86_64.zip</transform>
+                        <platform>windows-x86_64</platform>
+                      </artifact>
+                      <artifact>
+                        <path>{{artifactsDir}}/{{distributionName}}-{{projectVersion}}-osx-x86_64.zip</path>
+                        <transform>artifacts/{{distributionName}}-{{projectEffectiveVersion}}-osx-x86_64.zip</transform>
+                        <platform>osx-x86_64</platform>
+                      </artifact>
+                    </artifacts>
+                  </marketplace-client>
+                </distributions>
+              </jreleaser>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>
