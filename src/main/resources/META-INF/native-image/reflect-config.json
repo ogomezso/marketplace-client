@@ -1,0 +1,863 @@
+[
+{
+  "name":"[B"
+},
+{
+  "name":"[Ljava.lang.Class;"
+},
+{
+  "name":"[Ljava.lang.String;"
+},
+{
+  "name":"[Lsun.security.pkcs.SignerInfo;"
+},
+{
+  "name":"apple.security.AppleProvider",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.fasterxml.jackson.databind.ext.Java7HandlersImpl",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.fasterxml.jackson.databind.ext.Java7SupportImpl",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.fasterxml.jackson.module.jakarta.xmlbind.JakartaXmlBindAnnotationIntrospector",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.fasterxml.jackson.module.jakarta.xmlbind.ser.DataHandlerSerializer",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.crypto.provider.AESCipher$General",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.crypto.provider.ARCFOURCipher",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.crypto.provider.ChaCha20Cipher$ChaCha20Poly1305",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.crypto.provider.DESCipher",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.crypto.provider.DESedeCipher",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.crypto.provider.DHParameters",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.crypto.provider.GaloisCounterMode$AESGCM",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.crypto.provider.HmacCore$HmacSHA256",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.crypto.provider.HmacCore$HmacSHA384",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.crypto.provider.HmacPKCS12PBECore$HmacPKCS12PBE_SHA1",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.crypto.provider.PBEKeyFactory$PBEWithMD5AndDES",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.crypto.provider.PBES2Core$HmacSHA256AndAES_256",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.crypto.provider.PBES2Parameters$General",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.crypto.provider.TlsMasterSecretGenerator",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"es.santander.marketplace.client.Client",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"es.santander.marketplace.client.config.AppConfig",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[
+    {"name":"<init>","parameterTypes":[] }, 
+    {"name":"setSchemaRegistryKeyStorePassword","parameterTypes":["java.lang.String"] }, 
+    {"name":"setSchemaRegistryKeyStorePath","parameterTypes":["java.lang.String"] }, 
+    {"name":"setSchemaRegistryPassword","parameterTypes":["java.lang.String"] }, 
+    {"name":"setSchemaRegistryTrustStorePassword","parameterTypes":["java.lang.String"] }, 
+    {"name":"setSchemaRegistryTrustStorePath","parameterTypes":["java.lang.String"] }, 
+    {"name":"setSchemaRegistryUrl","parameterTypes":["java.lang.String"] }, 
+    {"name":"setSchemaRegistryUser","parameterTypes":["java.lang.String"] }
+  ]
+},
+{
+  "name":"es.santander.marketplace.client.model.topic.Consumer",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[
+    {"name":"<init>","parameterTypes":[] }, 
+    {"name":"setGroup","parameterTypes":["java.lang.String"] }, 
+    {"name":"setPrincipal","parameterTypes":["java.lang.String"] }
+  ]
+},
+{
+  "name":"es.santander.marketplace.client.model.topic.Metadata",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[
+    {"name":"<init>","parameterTypes":[] }, 
+    {"name":"setEventContent","parameterTypes":["java.lang.String"] }, 
+    {"name":"setEventDescription","parameterTypes":["java.lang.String"] }, 
+    {"name":"setEventName","parameterTypes":["java.lang.String"] }, 
+    {"name":"setTopicConfidentiality","parameterTypes":["java.lang.String"] }, 
+    {"name":"setTopicDescription","parameterTypes":["java.lang.String"] }, 
+    {"name":"setTopicPlatform","parameterTypes":["java.lang.String"] }, 
+    {"name":"setTopicSourceTableCDC","parameterTypes":["java.lang.String"] }, 
+    {"name":"setTopicStatus","parameterTypes":["java.lang.String"] }, 
+    {"name":"setTopicType","parameterTypes":["java.lang.String"] }
+  ]
+},
+{
+  "name":"es.santander.marketplace.client.model.topic.Producer",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[
+    {"name":"<init>","parameterTypes":[] }, 
+    {"name":"setPrincipal","parameterTypes":["java.lang.String"] }
+  ]
+},
+{
+  "name":"es.santander.marketplace.client.model.topic.Project",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[
+    {"name":"<init>","parameterTypes":[] }, 
+    {"name":"setName","parameterTypes":["java.lang.String"] }, 
+    {"name":"setTopics","parameterTypes":["java.util.List"] }
+  ]
+},
+{
+  "name":"es.santander.marketplace.client.model.topic.Schema",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[
+    {"name":"<init>","parameterTypes":[] }, 
+    {"name":"setCompatibility","parameterTypes":["java.lang.String"] }, 
+    {"name":"setSchemaFile","parameterTypes":["java.lang.String"] }
+  ]
+},
+{
+  "name":"es.santander.marketplace.client.model.topic.Topic",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[
+    {"name":"<init>","parameterTypes":[] }, 
+    {"name":"setConfig","parameterTypes":["java.util.Map"] }, 
+    {"name":"setConsumers","parameterTypes":["java.util.List"] }, 
+    {"name":"setMetadata","parameterTypes":["es.santander.marketplace.client.model.topic.Metadata"] }, 
+    {"name":"setName","parameterTypes":["java.lang.String"] }, 
+    {"name":"setProducers","parameterTypes":["java.util.List"] }, 
+    {"name":"setSchema","parameterTypes":["es.santander.marketplace.client.model.topic.Schema"] }
+  ]
+},
+{
+  "name":"es.santander.marketplace.client.model.topic.TopicTopology",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[
+    {"name":"<init>","parameterTypes":[] }, 
+    {"name":"setContext","parameterTypes":["java.lang.String"] }, 
+    {"name":"setProjects","parameterTypes":["java.util.List"] }
+  ]
+},
+{
+  "name":"es.santander.marketplace.client.rest.model.ApiTopic",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[
+    {"name":"getTopicCDCsourceTable","parameterTypes":[] }, 
+    {"name":"getTopicCodeId","parameterTypes":[] }, 
+    {"name":"getTopicConfidentialityData","parameterTypes":[] }, 
+    {"name":"getTopicCreationDate","parameterTypes":[] }, 
+    {"name":"getTopicDescription","parameterTypes":[] }, 
+    {"name":"getTopicFormData","parameterTypes":[] }, 
+    {"name":"getTopicIdApplication","parameterTypes":[] }, 
+    {"name":"getTopicName","parameterTypes":[] }, 
+    {"name":"getTopicPartitions","parameterTypes":[] }, 
+    {"name":"getTopicPlatform","parameterTypes":[] }, 
+    {"name":"getTopicStatus","parameterTypes":[] }, 
+    {"name":"getTopicTTL","parameterTypes":[] }, 
+    {"name":"getTopicType","parameterTypes":[] }
+  ]
+},
+{
+  "name":"es.santander.marketplace.client.rest.model.Application",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[
+    {"name":"getAppAtlas","parameterTypes":[] }, 
+    {"name":"getAppCodeId","parameterTypes":[] }, 
+    {"name":"getAppDescription","parameterTypes":[] }, 
+    {"name":"getAppKey","parameterTypes":[] }, 
+    {"name":"getAppName","parameterTypes":[] }, 
+    {"name":"getAppOwners","parameterTypes":[] }, 
+    {"name":"getDomainCodeId","parameterTypes":[] }
+  ]
+},
+{
+  "name":"es.santander.marketplace.client.rest.model.Event",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[
+    {"name":"getEventCodeId","parameterTypes":[] }, 
+    {"name":"getEventDescription","parameterTypes":[] }, 
+    {"name":"getEventName","parameterTypes":[] }, 
+    {"name":"getEventSchemaCompatibility","parameterTypes":[] }, 
+    {"name":"getEventSchemaId","parameterTypes":[] }, 
+    {"name":"getEventSchemaVersion","parameterTypes":[] }, 
+    {"name":"getTopic","parameterTypes":[] }
+  ]
+},
+{
+  "name":"es.santander.marketplace.client.rest.model.EventDocumentation",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"getDataTemplate","parameterTypes":[] }]
+},
+{
+  "name":"es.santander.marketplace.client.rest.model.EventExample",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"getExample","parameterTypes":[] }]
+},
+{
+  "name":"es.santander.marketplace.client.rest.model.SchemaResponse",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[
+    {"name":"<init>","parameterTypes":[] }, 
+    {"name":"setId","parameterTypes":["java.lang.Integer"] }, 
+    {"name":"setSchema","parameterTypes":["java.lang.String"] }, 
+    {"name":"setSubject","parameterTypes":["java.lang.String"] }, 
+    {"name":"setVersion","parameterTypes":["java.lang.Integer"] }
+  ]
+},
+{
+  "name":"es.santander.marketplace.client.rest.model.Subscription",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[
+    {"name":"getAppCodeId","parameterTypes":[] }, 
+    {"name":"getAppkey","parameterTypes":[] }, 
+    {"name":"getConsumerGroup","parameterTypes":[] }, 
+    {"name":"getStatus","parameterTypes":[] }, 
+    {"name":"getSubscriptionType","parameterTypes":[] }, 
+    {"name":"getTopicCodeId","parameterTypes":[] }, 
+    {"name":"getTopicName","parameterTypes":[] }
+  ]
+},
+{
+  "name":"es.santander.marketplace.client.rest.model.TopicRegistration",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[
+    {"name":"getApplication","parameterTypes":[] }, 
+    {"name":"getEvent","parameterTypes":[] }, 
+    {"name":"getEventDocumentation","parameterTypes":[] }, 
+    {"name":"getEventExample","parameterTypes":[] }
+  ]
+},
+{
+  "name":"jakarta.activation.DataSource"
+},
+{
+  "name":"jakarta.inject.Named",
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"value","parameterTypes":[] }]
+},
+{
+  "name":"jakarta.inject.Singleton",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"java.awt.image.RenderedImage"
+},
+{
+  "name":"java.lang.Object",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"java.lang.String"
+},
+{
+  "name":"java.nio.file.Path"
+},
+{
+  "name":"java.nio.file.Paths",
+  "queriedMethods":[{"name":"get","parameterTypes":["java.lang.String","java.lang.String[]"] }]
+},
+{
+  "name":"java.security.AlgorithmParametersSpi"
+},
+{
+  "name":"java.security.KeyStoreSpi"
+},
+{
+  "name":"java.security.SecureRandomParameters"
+},
+{
+  "name":"java.security.interfaces.RSAPrivateKey"
+},
+{
+  "name":"java.security.interfaces.RSAPublicKey"
+},
+{
+  "name":"java.sql.Connection"
+},
+{
+  "name":"java.sql.Date"
+},
+{
+  "name":"java.sql.Driver"
+},
+{
+  "name":"java.sql.DriverManager",
+  "queriedMethods":[
+    {"name":"getConnection","parameterTypes":["java.lang.String"] }, 
+    {"name":"getDriver","parameterTypes":["java.lang.String"] }
+  ]
+},
+{
+  "name":"java.sql.Time",
+  "queriedMethods":[{"name":"<init>","parameterTypes":["long"] }]
+},
+{
+  "name":"java.sql.Timestamp",
+  "queriedMethods":[{"name":"valueOf","parameterTypes":["java.lang.String"] }]
+},
+{
+  "name":"java.time.Duration",
+  "queriedMethods":[{"name":"parse","parameterTypes":["java.lang.CharSequence"] }]
+},
+{
+  "name":"java.time.Instant",
+  "queriedMethods":[{"name":"parse","parameterTypes":["java.lang.CharSequence"] }]
+},
+{
+  "name":"java.time.LocalDate",
+  "queriedMethods":[{"name":"parse","parameterTypes":["java.lang.CharSequence"] }]
+},
+{
+  "name":"java.time.LocalDateTime",
+  "queriedMethods":[{"name":"parse","parameterTypes":["java.lang.CharSequence"] }]
+},
+{
+  "name":"java.time.LocalTime",
+  "queriedMethods":[{"name":"parse","parameterTypes":["java.lang.CharSequence"] }]
+},
+{
+  "name":"java.time.MonthDay",
+  "queriedMethods":[{"name":"parse","parameterTypes":["java.lang.CharSequence"] }]
+},
+{
+  "name":"java.time.OffsetDateTime",
+  "queriedMethods":[{"name":"parse","parameterTypes":["java.lang.CharSequence"] }]
+},
+{
+  "name":"java.time.OffsetTime",
+  "queriedMethods":[{"name":"parse","parameterTypes":["java.lang.CharSequence"] }]
+},
+{
+  "name":"java.time.Period",
+  "queriedMethods":[{"name":"parse","parameterTypes":["java.lang.CharSequence"] }]
+},
+{
+  "name":"java.time.Year",
+  "queriedMethods":[{"name":"parse","parameterTypes":["java.lang.CharSequence"] }]
+},
+{
+  "name":"java.time.YearMonth",
+  "queriedMethods":[{"name":"parse","parameterTypes":["java.lang.CharSequence"] }]
+},
+{
+  "name":"java.time.ZoneId",
+  "queriedMethods":[{"name":"of","parameterTypes":["java.lang.String"] }]
+},
+{
+  "name":"java.time.ZoneOffset",
+  "queriedMethods":[{"name":"of","parameterTypes":["java.lang.String"] }]
+},
+{
+  "name":"java.time.ZonedDateTime",
+  "queriedMethods":[{"name":"parse","parameterTypes":["java.lang.CharSequence"] }]
+},
+{
+  "name":"java.util.Date"
+},
+{
+  "name":"javax.naming.InitialContext",
+  "methods":[
+    {"name":"<init>","parameterTypes":[] }, 
+    {"name":"lookup","parameterTypes":["java.lang.String"] }
+  ]
+},
+{
+  "name":"javax.security.auth.x500.X500Principal",
+  "fields":[{"name":"thisX500Name"}],
+  "methods":[{"name":"<init>","parameterTypes":["sun.security.x509.X500Name"] }]
+},
+{
+  "name":"javax.xml.transform.Source"
+},
+{
+  "name":"javax.xml.transform.dom.DOMSource"
+},
+{
+  "name":"javax.xml.transform.sax.SAXSource"
+},
+{
+  "name":"javax.xml.transform.stream.StreamSource"
+},
+{
+  "name":"org.glassfish.hk2.internal.PerThreadContext",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true
+},
+{
+  "name":"org.glassfish.jersey.client.ChunkedInputReader",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.glassfish.jersey.client.ClientAsyncExecutor",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.glassfish.jersey.client.ClientBackgroundScheduler",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.glassfish.jersey.inject.hk2.ContextInjectionResolverImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.glassfish.jersey.inject.hk2.Hk2InjectionManagerFactory",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.glassfish.jersey.inject.hk2.Hk2RequestScope",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.glassfish.jersey.inject.hk2.InstanceSupplierFactoryBridge",
+  "queriedMethods":[{"name":"provide","parameterTypes":[] }]
+},
+{
+  "name":"org.glassfish.jersey.inject.hk2.JerseyErrorService",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.glassfish.jersey.inject.hk2.RequestContext",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":["org.glassfish.jersey.process.internal.RequestScope"] }]
+},
+{
+  "name":"org.glassfish.jersey.internal.JaxrsProviders",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.glassfish.jersey.internal.config.ExternalPropertiesAutoDiscoverable",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.glassfish.jersey.internal.config.ExternalPropertiesConfigurationFeature",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.glassfish.jersey.internal.inject.Custom",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.glassfish.jersey.jackson.JacksonFeature",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.glassfish.jersey.jackson.internal.DefaultJacksonJaxbJsonProvider",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[
+    {"name":"<init>","parameterTypes":[] }, 
+    {"name":"findAndRegisterModules","parameterTypes":[] }
+  ]
+},
+{
+  "name":"org.glassfish.jersey.jackson.internal.jackson.jaxrs.base.ProviderBase",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJaxbJsonProvider",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJsonProvider",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.glassfish.jersey.logging.LoggingFeatureAutoDiscoverable",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.glassfish.jersey.message.internal.AbstractFormProvider",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.glassfish.jersey.message.internal.AbstractMessageReaderWriterProvider",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.glassfish.jersey.message.internal.BasicTypesMessageProvider",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.glassfish.jersey.message.internal.ByteArrayProvider",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.glassfish.jersey.message.internal.DataSourceProvider",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.glassfish.jersey.message.internal.EnumMessageProvider",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.glassfish.jersey.message.internal.FileProvider",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.glassfish.jersey.message.internal.FormMultivaluedMapProvider",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.glassfish.jersey.message.internal.FormProvider",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.glassfish.jersey.message.internal.InputStreamProvider",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.glassfish.jersey.message.internal.ReaderProvider",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.glassfish.jersey.message.internal.RenderedImageProvider",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.glassfish.jersey.message.internal.SourceProvider$DomSourceReader",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":["jakarta.inject.Provider"] }]
+},
+{
+  "name":"org.glassfish.jersey.message.internal.SourceProvider$SaxSourceReader",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":["jakarta.inject.Provider"] }]
+},
+{
+  "name":"org.glassfish.jersey.message.internal.SourceProvider$SourceWriter",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":["jakarta.inject.Provider","jakarta.inject.Provider"] }]
+},
+{
+  "name":"org.glassfish.jersey.message.internal.SourceProvider$StreamSourceReader",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.glassfish.jersey.message.internal.StreamingOutputProvider",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.glassfish.jersey.message.internal.StringMessageProvider",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.glassfish.jersey.process.internal.RequestScope",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.jvnet.hk2.internal.DynamicConfigurationServiceImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":["org.glassfish.hk2.api.ServiceLocator"] }]
+},
+{
+  "name":"org.jvnet.hk2.internal.ServiceLocatorRuntimeImpl",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":["org.glassfish.hk2.api.ServiceLocator"] }]
+},
+{
+  "name":"sun.security.pkcs12.PKCS12KeyStore",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.security.pkcs12.PKCS12KeyStore$DualFormatPKCS12",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.security.provider.DSA$SHA224withDSA",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.security.provider.DSA$SHA256withDSA",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.security.provider.JavaKeyStore$DualFormatJKS",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.security.provider.JavaKeyStore$JKS",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.security.provider.NativePRNG",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.security.provider.SHA",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.security.provider.SHA2$SHA224",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.security.provider.SHA2$SHA256",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.security.provider.SHA5$SHA384",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.security.provider.SHA5$SHA512",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.security.provider.X509Factory",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.security.provider.certpath.PKIXCertPathValidator",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.security.rsa.PSSParameters",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.security.rsa.RSAKeyFactory$Legacy",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.security.rsa.RSAPSSSignature",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.security.rsa.RSASignature$SHA224withRSA",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.security.rsa.RSASignature$SHA256withRSA",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.security.ssl.KeyManagerFactoryImpl$SunX509",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.security.ssl.SSLContextImpl$DefaultSSLContext",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.security.ssl.SSLContextImpl$TLSContext",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.security.ssl.TrustManagerFactoryImpl$PKIXFactory",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.security.util.ObjectIdentifier"
+},
+{
+  "name":"sun.security.x509.AuthorityInfoAccessExtension",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Boolean","java.lang.Object"] }]
+},
+{
+  "name":"sun.security.x509.AuthorityKeyIdentifierExtension",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Boolean","java.lang.Object"] }]
+},
+{
+  "name":"sun.security.x509.BasicConstraintsExtension",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Boolean","java.lang.Object"] }]
+},
+{
+  "name":"sun.security.x509.CRLDistributionPointsExtension",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Boolean","java.lang.Object"] }]
+},
+{
+  "name":"sun.security.x509.CertificateExtensions"
+},
+{
+  "name":"sun.security.x509.CertificatePoliciesExtension",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Boolean","java.lang.Object"] }]
+},
+{
+  "name":"sun.security.x509.ExtendedKeyUsageExtension",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Boolean","java.lang.Object"] }]
+},
+{
+  "name":"sun.security.x509.IssuerAlternativeNameExtension",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Boolean","java.lang.Object"] }]
+},
+{
+  "name":"sun.security.x509.KeyUsageExtension",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Boolean","java.lang.Object"] }]
+},
+{
+  "name":"sun.security.x509.NetscapeCertTypeExtension",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Boolean","java.lang.Object"] }]
+},
+{
+  "name":"sun.security.x509.PrivateKeyUsageExtension",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Boolean","java.lang.Object"] }]
+},
+{
+  "name":"sun.security.x509.SubjectAlternativeNameExtension",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Boolean","java.lang.Object"] }]
+},
+{
+  "name":"sun.security.x509.SubjectKeyIdentifierExtension",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Boolean","java.lang.Object"] }]
+}
+]

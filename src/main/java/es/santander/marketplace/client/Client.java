@@ -1,14 +1,10 @@
 package es.santander.marketplace.client;
 
-import java.io.IOException;
 import java.util.concurrent.Callable;
 
-import com.fasterxml.jackson.core.exc.StreamReadException;
-import com.fasterxml.jackson.databind.DatabindException;
-
 import es.santander.marketplace.client.filehandler.TopologyFileProcessor;
-import picocli.CommandLine.Parameters;
 import picocli.CommandLine;
+import picocli.CommandLine.Parameters;
 
 public class Client implements Callable<Integer> {
     @Parameters(index = "0", description = "Absolute path to client config file.")
@@ -27,7 +23,7 @@ public class Client implements Callable<Integer> {
         return 0;
     }
 
-    public static void main(String[] args) throws StreamReadException, DatabindException, IOException {
+    public static void main(String[] args) {
 
         int exitCode = new CommandLine(new Client()).execute(args);
         System.exit(exitCode);

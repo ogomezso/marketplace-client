@@ -9,12 +9,72 @@
 
   <properties>
     <java.version>17</java.version>
+    <mainClass>es.santander.marketplace.client.Client</mainClass>
+    <graal.version>21.2.0</graal.version>
+
     <maven.compiler.parameters>true</maven.compiler.parameters>
     <maven.compiler.release>${java.version}</maven.compiler.release>
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
     <picocli.version>4.6.3</picocli.version>
+
+
+    <!-- Plugins -->
+    <version.antrun.plugin>3.0.0</version.antrun.plugin>
+    <version.assembly.plugin>3.3.0</version.assembly.plugin>
+    <version.clean.plugin>3.1.0</version.clean.plugin>
+    <version.compiler.plugin>3.9.0</version.compiler.plugin>
+    <version.dependency.plugin>3.1.2</version.dependency.plugin>
+    <version.directory.plugin>0.3.1</version.directory.plugin>
+    <version.enforcer.plugin>3.0.0-M3</version.enforcer.plugin>
+    <version.enforcer.rules>1.5.1</version.enforcer.rules>
+    <version.failsafe.plugin>3.0.0-M5</version.failsafe.plugin>
+    <version.git.plugin>3.0.1</version.git.plugin>
+    <version.gpg.plugin>1.6</version.gpg.plugin>
+    <version.javadoc.plugin>3.2.0</version.javadoc.plugin>
+    <version.jar.plugin>3.2.2</version.jar.plugin>
+    <version.license.plugin>4.0.rc2</version.license.plugin>
+    <version.nexus.plugin>1.6.8</version.nexus.plugin>
+    <version.resources.plugin>3.2.0</version.resources.plugin>
+    <version.site.plugin>3.10.0</version.site.plugin>
+    <version.source.plugin>3.2.1</version.source.plugin>
+    <version.surefire.plugin>3.0.0-M5</version.surefire.plugin>
+    <version.versions.plugin>2.8.1</version.versions.plugin>
+
+    <executable-suffix />
+    <jreleaser.git.root.search>true</jreleaser.git.root.search>
+
+    <app.name>${project.artifactId}</app.name>
+    <app.version>${project.version}</app.version>
+    <app.buildtime>${maven.build.timestamp}</app.buildtime>
   </properties>
+
+  <developers>
+    <developer>
+      <id>ogomezso</id>
+      <name>Oscar Gómez Soriano</name>
+    </developer>
+  </developers>
+
+  <licenses>
+    <license>
+      <name>Apache-2.0</name>
+      <url>https://github.com/jeqo/kafka-cli/blob/main/cli/quotas/LICENSE</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <scm>
+    <connection>scm:git:${repository.url}</connection>
+    <developerConnection>scm:git:${repository.url}</developerConnection>
+    <tag>HEAD</tag>
+    <url>${repository.url}</url>
+  </scm>
+
+  <issueManagement>
+    <system>GitHub</system>
+    <url>https://github.com/${project.github.repository}/issues</url>
+  </issueManagement>
+
   <dependencies>
     <dependency>
       <groupId>org.glassfish.jersey.core</groupId>
@@ -43,9 +103,9 @@
       <version>1.7.36</version>
     </dependency>
     <dependency>
-      <groupId>org.yaml</groupId>
-      <artifactId>snakeyaml</artifactId>
-      <version>1.30</version>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+      <version>2.13.3</version>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
@@ -67,5 +127,164 @@
       <artifactId>picocli-codegen</artifactId>
       <version>${picocli.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.graalvm.nativeimage</groupId>
+      <artifactId>svm</artifactId>
+      <version>${graal.version}</version>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
+  <build>
+    <extensions>
+      <extension>
+        <groupId>kr.motd.maven</groupId>
+        <artifactId>os-maven-plugin</artifactId>
+        <version>1.7.0</version>
+      </extension>
+    </extensions>
+    <resources>
+      <resource>
+        <!-- Filter for version name in properties -->
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <version>${version.assembly.plugin}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>${version.compiler.plugin}</version>
+          <configuration>
+            <parameters>true</parameters>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>${version.clean.plugin}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-enforcer-plugin</artifactId>
+          <version>${version.enforcer.plugin}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>${version.jar.plugin}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>${version.resources.plugin}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>${version.site.plugin}</version>
+        </plugin>
+        <plugin>
+          <groupId>com.mycila</groupId>
+          <artifactId>license-maven-plugin</artifactId>
+          <version>${version.license.plugin}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-antrun-plugin</artifactId>
+          <version>${version.antrun.plugin}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <version>${version.dependency.plugin}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-source-plugin</artifactId>
+          <version>${version.source.plugin}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.commonjava.maven.plugins</groupId>
+          <artifactId>directory-maven-plugin</artifactId>
+          <version>${version.directory.plugin}</version>
+        </plugin>
+        <plugin>
+          <groupId>pl.project13.maven</groupId>
+          <artifactId>git-commit-id-plugin</artifactId>
+          <version>${version.git.plugin}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.graalvm.buildtools</groupId>
+          <artifactId>native-maven-plugin</artifactId>
+          <version>${graal.version}</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <configuration>
+          <propertiesEncoding>${project.build.sourceEncoding}</propertiesEncoding>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <parameters>${maven.compiler.parameters}</parameters>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <configuration>
+          <archive>
+            <manifestEntries>
+              <Build-Jdk>${java.version} (${java.vendor} ${java.vm.version})</Build-Jdk>
+              <Build-Timestamp>${git.build.time}</Build-Timestamp>
+              <Build-Revision>${git.commit.id}</Build-Revision>
+              <Build-OS>${os.name} ${os.arch} ${os.version}</Build-OS>
+            </manifestEntries>
+            <manifest>
+              <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+              <addClasspath>true</addClasspath>
+              <classpathPrefix>libs/</classpathPrefix>
+              <mainClass>${mainClass}</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+            <configuration>
+              <archive>
+                <manifest>
+                  <mainClass>
+                       ${mainClass}
+                    </mainClass>
+                </manifest>
+              </archive>
+              <descriptorRefs>
+                <descriptorRef>jar-with-dependencies</descriptorRef>
+              </descriptorRefs>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 </project>

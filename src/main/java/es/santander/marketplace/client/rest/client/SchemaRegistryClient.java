@@ -4,6 +4,7 @@ import javax.net.ssl.SSLContext;
 
 import org.glassfish.jersey.SslConfigurator;
 import org.glassfish.jersey.client.authentication.HttpAuthenticationFeature;
+import org.glassfish.jersey.jackson.JacksonFeature;
 
 import es.santander.marketplace.client.config.AppConfig;
 import es.santander.marketplace.client.rest.model.SchemaResponse;
@@ -30,6 +31,7 @@ public class SchemaRegistryClient {
     return ClientBuilder.newBuilder()
         .sslContext(getSslContext(appConfig))
         .build()
+        .register(JacksonFeature.class)
         .register(basicAuth);
   }
 
