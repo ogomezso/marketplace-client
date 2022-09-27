@@ -81,17 +81,17 @@
     <dependency>
       <groupId>org.glassfish.jersey.core</groupId>
       <artifactId>jersey-client</artifactId>
-      <version>3.0.6</version>
+      <version>3.0.8</version>
     </dependency>
     <dependency>
       <groupId>org.glassfish.jersey.media</groupId>
       <artifactId>jersey-media-json-jackson</artifactId>
-      <version>3.0.6</version>
+      <version>3.0.8</version>
     </dependency>
     <dependency>
       <groupId>org.glassfish.jersey.inject</groupId>
       <artifactId>jersey-hk2</artifactId>
-      <version>3.0.6</version>
+      <version>3.0.8</version>
     </dependency>
     <dependency>
       <groupId>org.projectlombok</groupId>
@@ -107,17 +107,17 @@
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-core</artifactId>
-      <version>2.13.3</version>
+      <version>2.13.4</version>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
-      <version>2.13.3</version>
+      <version>2.13.4</version>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.dataformat</groupId>
       <artifactId>jackson-dataformat-yaml</artifactId>
-      <version>2.13.3</version>
+      <version>2.13.4</version>
     </dependency>
     <dependency>
       <groupId>info.picocli</groupId>
@@ -362,7 +362,8 @@
               <mainClass>${mainClass}</mainClass>
               <buildArgs>
                 <buildArg>--no-fallback</buildArg>
-                <!-- <buildArg>-link-at-build-time</buildArg> -->
+                <buildArg>--initialize-at-build-time=org.glassfish.jersey.client.internal.HttpUrlConnector</buildArg>
+                <buildArg>-H:EnableURLProtocols=http,https</buildArg>
                 <buildArg>-H:ReflectionConfigurationFiles=../src/main/resources/META-INF/native-image/reflect-config.json</buildArg>
                 <buildArg>-H:Log=registerResource:3</buildArg>
                 <buildArg>-H:+ReportExceptionStackTraces</buildArg>
@@ -387,6 +388,18 @@
           </plugin>
         </plugins>
       </build>
+      <dependencies>
+        <dependency>
+          <groupId>jakarta.activation</groupId>
+          <artifactId>jakarta.activation-api</artifactId>
+          <version>2.1.0</version>
+        </dependency>
+        <dependency>
+          <groupId>org.osgi</groupId>
+          <artifactId>org.osgi.framework</artifactId>
+          <version>1.10.0</version>
+        </dependency>
+      </dependencies>
     </profile>
     <profile>
       <id>dist</id>
