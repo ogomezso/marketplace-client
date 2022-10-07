@@ -1,3 +1,7 @@
 .vscode/**
-data-examples/**
+**/data-examples/**
 **/target/**
+/.idea/
+/.apt_generated/
+/.apt_generated_tests/
+.DS_STORE

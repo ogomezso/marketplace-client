@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -58,49 +59,65 @@ public class TopologyFileProcessor {
     }
 
     private void processTopic(String projectName, Topic topic) {
-
-        String subject = topic.getName() + "-value";
+        String fullyQualifiedTopicName = "SANES."+ projectName + "." + topic.getName();
+        String subject = fullyQualifiedTopicName + "-value";
         SchemaResponse schema = schemaRegistryClient.getSchemaInfo(appConfig, subject);
         TopicRegistration topicRegistration = registerRequestMapper.toRequest(projectName, topic, schema);
+        topicRegistration.getEvent().getTopic().setTopicName(fullyQualifiedTopicName);
 
         createFolderIfNotExists(appConfig.getDumpEventsFilePath());
         createFolderIfNotExists(appConfig.getDumpSubscriptionsFilePath());
 
         List<Subscription> producerSubscriptions = topic.getProducers().stream()
-                .map(producer -> subscriptionRequestMapper.toProducerSubscription(topic.getName(), producer))
+                .map(producer -> subscriptionRequestMapper.toProducerSubscription(fullyQualifiedTopicName, producer))
                 .collect(Collectors.toList());
 
         List<Subscription> consumerSubscriptions = topic.getConsumers().stream()
-                .map(consumer -> subscriptionRequestMapper.toConsumerSubscription(topic.getName(), consumer)).toList();
+                .map(consumer -> subscriptionRequestMapper.toConsumerSubscription(fullyQualifiedTopicName, consumer)).toList();
 
-        createJsonFile(appConfig.getDumpEventsFilePath() + topic.getName(), topicRegistration);
+        createJsonFile(appConfig.getDumpEventsFilePath() + fullyQualifiedTopicName, topicRegistration);
+        createSubjectSchemaFilePathFile(appConfig.getDumpEventsFilePath() + subject+".txt", topic.getSchema().getSchemaFile());
 
         producerSubscriptions.forEach(producer -> createJsonFile(
-                appConfig.getDumpSubscriptionsFilePath() + producer.getSubscriptionType() + "_" + producer.getAppkey() + "_"
+                appConfig.getDumpSubscriptionsFilePath() + "PRODUCER" + "_" + producer.getAppkey() + "_"
                         + producer.getTopicName(),
                 producer));
         consumerSubscriptions.forEach(consumer -> createJsonFile(
-                appConfig.getDumpSubscriptionsFilePath() + consumer.getSubscriptionType() + "_"
-                        + consumer.getAppkey() + "_" + consumer.getTopicName() + "_" + consumer.getConsumerGroup(),
+                appConfig.getDumpSubscriptionsFilePath() + "CONSUMER" + "_"
+                        + consumer.getAppkey() + "_" + consumer.getTopicName() + "_" + consumer.getSubtConsumerGroup(),
                 consumer));
     }
 
-    private void createJsonFile(String filename, Object pojo) {
+    private void createJsonFile(String fileName, Object pojo) {
+        createFile(fileName, ".json", pojo);
+    }
+
+    private void createSubjectSchemaFilePathFile(String filename, String path) {
         try {
-            fileMapper.writeValue(Paths.get(filename + ".json").toFile(), pojo);
+            Files.write(Paths.get(filename), path.getBytes());
+        } catch (IOException e) {
+            System.out.println("Error processing Schema file");
+            e.printStackTrace();
+        }
+    }
+
+    private void createFile(String filename, String extension, Object pojo) {
+        fileMapper.setSerializationInclusion(Include.NON_NULL);
+        try {
+            fileMapper.writeValue(Paths.get(filename + extension).toFile(), pojo);
         } catch (IOException e) {
             System.out.println("Error processing registration file");
             e.printStackTrace();
         }
     }
 
-    private void createFolderIfNotExists(String path){
-       Path dir = Paths.get(path);
-       try {
-        Files.createDirectories(dir);
-    } catch (IOException e) {
-        log.error("Error creating dump files path");
-        e.printStackTrace();
-    }
+    private void createFolderIfNotExists(String path) {
+        Path dir = Paths.get(path);
+        try {
+            Files.createDirectories(dir);
+        } catch (IOException e) {
+            log.error("Error creating dump files path");
+            e.printStackTrace();
+        }
     }
 }

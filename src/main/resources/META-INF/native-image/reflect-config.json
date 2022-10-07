@@ -131,6 +131,7 @@
     {"name":"setEventContent","parameterTypes":["java.lang.String"] }, 
     {"name":"setEventDescription","parameterTypes":["java.lang.String"] }, 
     {"name":"setEventName","parameterTypes":["java.lang.String"] }, 
+    {"name":"setTopicCategory","parameterTypes":["java.lang.String"] }, 
     {"name":"setTopicConfidentiality","parameterTypes":["java.lang.String"] }, 
     {"name":"setTopicDescription","parameterTypes":["java.lang.String"] }, 
     {"name":"setTopicPlatform","parameterTypes":["java.lang.String"] }, 
@@ -204,6 +205,7 @@
   "queryAllDeclaredConstructors":true,
   "methods":[
     {"name":"getTopicCDCsourceTable","parameterTypes":[] }, 
+    {"name":"getTopicCategory","parameterTypes":[] }, 
     {"name":"getTopicCodeId","parameterTypes":[] }, 
     {"name":"getTopicConfidentialityData","parameterTypes":[] }, 
     {"name":"getTopicCreationDate","parameterTypes":[] }, 
@@ -224,12 +226,10 @@
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
   "methods":[
-    {"name":"getAppAtlas","parameterTypes":[] }, 
     {"name":"getAppCodeId","parameterTypes":[] }, 
     {"name":"getAppDescription","parameterTypes":[] }, 
     {"name":"getAppKey","parameterTypes":[] }, 
     {"name":"getAppName","parameterTypes":[] }, 
-    {"name":"getAppOwners","parameterTypes":[] }, 
     {"name":"getDomainCodeId","parameterTypes":[] }
   ]
 },
@@ -247,20 +247,6 @@
     {"name":"getEventSchemaVersion","parameterTypes":[] }, 
     {"name":"getTopic","parameterTypes":[] }
   ]
-},
-{
-  "name":"es.santander.marketplace.client.rest.model.EventDocumentation",
-  "allDeclaredFields":true,
-  "queryAllDeclaredMethods":true,
-  "queryAllDeclaredConstructors":true,
-  "methods":[{"name":"getDataTemplate","parameterTypes":[] }]
-},
-{
-  "name":"es.santander.marketplace.client.rest.model.EventExample",
-  "allDeclaredFields":true,
-  "queryAllDeclaredMethods":true,
-  "queryAllDeclaredConstructors":true,
-  "methods":[{"name":"getExample","parameterTypes":[] }]
 },
 {
   "name":"es.santander.marketplace.client.rest.model.SchemaResponse",
@@ -281,12 +267,15 @@
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
   "methods":[
-    {"name":"getAppCodeId","parameterTypes":[] }, 
     {"name":"getAppkey","parameterTypes":[] }, 
-    {"name":"getConsumerGroup","parameterTypes":[] }, 
-    {"name":"getStatus","parameterTypes":[] }, 
-    {"name":"getSubscriptionType","parameterTypes":[] }, 
-    {"name":"getTopicCodeId","parameterTypes":[] }, 
+    {"name":"getSubtAppCodeId","parameterTypes":[] }, 
+    {"name":"getSubtCodeId","parameterTypes":[] }, 
+    {"name":"getSubtConsumerGroup","parameterTypes":[] }, 
+    {"name":"getSubtStatus","parameterTypes":[] }, 
+    {"name":"getSubtTopicCodeId","parameterTypes":[] }, 
+    {"name":"getSubtType","parameterTypes":[] }, 
+    {"name":"getSubtUserCodeIdApproval","parameterTypes":[] }, 
+    {"name":"getSubtUserCodeIdRequest","parameterTypes":[] }, 
     {"name":"getTopicName","parameterTypes":[] }
   ]
 },
@@ -297,9 +286,7 @@
   "queryAllDeclaredConstructors":true,
   "methods":[
     {"name":"getApplication","parameterTypes":[] }, 
-    {"name":"getEvent","parameterTypes":[] }, 
-    {"name":"getEventDocumentation","parameterTypes":[] }, 
-    {"name":"getEventExample","parameterTypes":[] }
+    {"name":"getEvent","parameterTypes":[] }
   ]
 },
 {
@@ -715,6 +702,9 @@
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
   "methods":[{"name":"<init>","parameterTypes":["org.glassfish.hk2.api.ServiceLocator"] }]
+},
+{
+  "name":"org.osgi.framework.BundleReference"
 },
 {
   "name":"sun.security.pkcs12.PKCS12KeyStore",

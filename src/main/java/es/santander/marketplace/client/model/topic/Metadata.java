@@ -13,4 +13,5 @@ public class Metadata {
     private String topicPlatform;
     private String topicStatus;
     private String topicSourceTableCDC;
+    private String topicCategory;
 }

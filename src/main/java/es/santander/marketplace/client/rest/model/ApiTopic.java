@@ -6,20 +6,18 @@ import lombok.Data;
 @Builder
 @Data
 public class ApiTopic {
-    @Builder.Default
-    private Integer topicCodeId = 0;
+    private Integer topicCodeId;
     private String topicName;
     private String topicDescription;
-    @Builder.Default
-    private Integer topicFormData = 0;
+    private Integer topicFormData;
     private String topicCreationDate;
-    private String topicType;
+    private Integer topicType;
     private Integer topicStatus;
-    private String topicConfidentialityData;
-    private String topicPartitions;
+    private Integer topicConfidentialityData;
+    private Integer topicPartitions;
     private Integer topicTTL;
-    private String topicPlatform;
+    private Integer topicPlatform;
     private String topicCDCsourceTable;
-    @Builder.Default
-    private Integer topicIdApplication = 0;
+    private Integer topicIdApplication;
+    private Integer topicCategory;
 }

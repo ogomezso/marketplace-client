@@ -8,6 +8,4 @@ import lombok.Data;
 public class TopicRegistration {
     private Application application;
     private Event event;
-    private EventDocumentation eventDocumentation;
-    private EventExample eventExample;
 }

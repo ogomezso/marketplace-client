@@ -6,8 +6,7 @@ import lombok.Data;
 @Builder
 @Data
 public class Event {
-    @Builder.Default
-    private Integer eventCodeId = 0;
+    private Integer eventCodeId;
     private String eventName;
     private String eventSchemaId;
     private String eventSchemaVersion;

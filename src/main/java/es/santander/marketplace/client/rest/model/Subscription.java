@@ -6,14 +6,14 @@ import lombok.Data;
 @Builder
 @Data
 public class Subscription {
-    @Builder.Default
-    Integer appCodeId = 0;
     String appkey;
-    @Builder.Default
-    Integer topicCodeId = 0;
     String topicName;
-    String subscriptionType;
-    String consumerGroup;
-    @Builder.Default
-    Integer status = 0;
+    Integer subtCodeId;
+    Integer subtAppCodeId;
+    Integer subtTopicCodeId;
+    String subtConsumerGroup;
+    Integer subtType;
+    Integer subtStatus;
+    Integer subtUserCodeIdRequest;
+    Integer subtUserCodeIdApproval;
 }
