@@ -9,7 +9,7 @@ import lombok.Data;
 public class Topic {
     private String name;
     private Map<String,Object> config;
-    private Schema schema;
+    private Schema schemas;
     private List<Producer> producers;
     private List<Consumer> consumers;
     private Metadata metadata;

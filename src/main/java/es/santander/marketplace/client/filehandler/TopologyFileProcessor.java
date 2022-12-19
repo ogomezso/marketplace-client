@@ -76,7 +76,7 @@ public class TopologyFileProcessor {
                 .map(consumer -> subscriptionRequestMapper.toConsumerSubscription(fullyQualifiedTopicName, consumer)).toList();
 
         createJsonFile(appConfig.getDumpEventsFilePath() + fullyQualifiedTopicName, topicRegistration);
-        createSubjectSchemaFilePathFile(appConfig.getDumpEventsFilePath() + subject+".txt", topic.getSchema().getSchemaFile());
+        createSubjectSchemaFilePathFile(appConfig.getDumpEventsFilePath() + subject+".txt", topic.getSchemas().getSchemaFile());
 
         producerSubscriptions.forEach(producer -> createJsonFile(
                 appConfig.getDumpSubscriptionsFilePath() + "PRODUCER" + "_" + producer.getAppkey() + "_"

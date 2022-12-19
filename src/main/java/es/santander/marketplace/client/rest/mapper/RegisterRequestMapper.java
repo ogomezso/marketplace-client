@@ -28,7 +28,7 @@ public class RegisterRequestMapper {
     return Event.builder().eventName(topic.getMetadata().getEventName())
         .eventSchemaId(String.valueOf(schema.getId()))
         .eventSchemaVersion(String.valueOf(schema.getVersion()))
-        .eventSchemaCompatibility(topic.getSchema().getCompatibility())
+        .eventSchemaCompatibility(topic.getSchemas().getCompatibility())
         .eventDescription(topic.getMetadata().getEventDescription()).topic(toApiTopic(topic))
         .build();
   }
