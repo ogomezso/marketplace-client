@@ -27,7 +27,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class TopologyFileProcessor {
 
-    private final YamlToPojo yamlToPojo = new YamlToPojo();
     private final ObjectMapper fileMapper = new ObjectMapper();
     private final RegisterRequestMapper registerRequestMapper = new RegisterRequestMapper();
     private final SubscriptionRequestMapper subscriptionRequestMapper = new SubscriptionRequestMapper();
@@ -40,6 +39,7 @@ public class TopologyFileProcessor {
     public TopologyFileProcessor(String topologyFilePath, String configFilepath)
             throws StreamReadException, DatabindException, IOException {
 
+        YamlToPojo yamlToPojo = new YamlToPojo();
         this.appConfig = yamlToPojo.yamlToConfig(configFilepath);
         this.topology = yamlToPojo.yamlToTopic(topologyFilePath);
     }
@@ -47,36 +47,46 @@ public class TopologyFileProcessor {
     public void processTopologyFile()
             throws StreamReadException, DatabindException, IOException {
 
-        topology.getProjects().forEach(project -> processProject(project));
+        topology.getProjects().forEach(this::processProject);
 
     }
 
     private void processProject(Project project) {
 
         String projectName = project.getName();
-        project.getTopics().forEach(topic -> processTopic(projectName, topic));
+        project.getTopics().forEach(topic -> {
+            processTopic(projectName, topic);
+        });
 
     }
 
     private void processTopic(String projectName, Topic topic) {
         String fullyQualifiedTopicName = "SANES."+ projectName + "." + topic.getName();
         String subject = fullyQualifiedTopicName + "-value";
+        String topicFolder = appConfig.getDumpEventsFilePath() + fullyQualifiedTopicName + "/";
         SchemaResponse schema = schemaRegistryClient.getSchemaInfo(appConfig, subject);
         TopicRegistration topicRegistration = registerRequestMapper.toRequest(projectName, topic, schema);
         topicRegistration.getEvent().getTopic().setTopicName(fullyQualifiedTopicName);
 
         createFolderIfNotExists(appConfig.getDumpEventsFilePath());
         createFolderIfNotExists(appConfig.getDumpSubscriptionsFilePath());
+        createFolderIfNotExists(topicFolder);
 
         List<Subscription> producerSubscriptions = topic.getProducers().stream()
                 .map(producer -> subscriptionRequestMapper.toProducerSubscription(fullyQualifiedTopicName, producer))
-                .collect(Collectors.toList());
+                .toList();
 
         List<Subscription> consumerSubscriptions = topic.getConsumers().stream()
                 .map(consumer -> subscriptionRequestMapper.toConsumerSubscription(fullyQualifiedTopicName, consumer)).toList();
 
-        createJsonFile(appConfig.getDumpEventsFilePath() + fullyQualifiedTopicName, topicRegistration);
-        createSubjectSchemaFilePathFile(appConfig.getDumpEventsFilePath() + subject+".txt", topic.getSchemas().getSchemaFile());
+        createJsonFile(topicFolder + fullyQualifiedTopicName, topicRegistration);
+        if (topic.getSchemas() != null) {
+            createSubjectSchemaFilePathFile(topicFolder + fullyQualifiedTopicName + "--schema.txt", topic.getSchemas().getSchemaFile());
+        }
+
+        if (!topic.getMetadata().getEventExample().isBlank() && !topic.getMetadata().getEventExample().isEmpty()) {
+            createJsonFile(topicFolder + fullyQualifiedTopicName + "--example", topic.getMetadata().getEventExample());
+        }
 
         producerSubscriptions.forEach(producer -> createJsonFile(
                 appConfig.getDumpSubscriptionsFilePath() + "PRODUCER" + "_" + producer.getAppkey() + "_"
@@ -96,7 +106,6 @@ public class TopologyFileProcessor {
         try {
             Files.write(Paths.get(filename), path.getBytes());
         } catch (IOException e) {
-            System.out.println("Error processing Schema file");
             e.printStackTrace();
         }
     }

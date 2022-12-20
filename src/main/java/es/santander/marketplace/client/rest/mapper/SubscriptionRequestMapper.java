@@ -4,11 +4,14 @@ import es.santander.marketplace.client.model.topic.Consumer;
 import es.santander.marketplace.client.model.topic.Producer;
 import es.santander.marketplace.client.rest.model.Subscription;
 
+import java.util.List;
+
 public class SubscriptionRequestMapper {
 
     private static final Integer CONSUMER = 1;
     private static final Integer PRODUCER = 0;
-    private static final String PRINCIPAL_PREFIX = "apl_";
+    private static final String PRINCIPAL_USER_PREFIX = "User:apl_";
+    private static final String PRINCIPAL_GRP_PREFIX = "Group:grp_";
 
     public Subscription toConsumerSubscription(String topicName, Consumer consumer){
 
@@ -30,6 +33,6 @@ public class SubscriptionRequestMapper {
     }
 
     private String extractAppKey(String principal) {
-        return principal.substring(principal.lastIndexOf(PRINCIPAL_PREFIX));
+        return principal.substring(principal.indexOf("_")+1);
     }
 }

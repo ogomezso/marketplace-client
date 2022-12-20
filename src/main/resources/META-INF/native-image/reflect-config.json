@@ -112,14 +112,14 @@
   "queryAllDeclaredConstructors":true,
   "methods":[
     {"name":"<init>","parameterTypes":[] }, 
-    {"name":"setEventContent","parameterTypes":["java.lang.String"] }, 
     {"name":"setEventDescription","parameterTypes":["java.lang.String"] }, 
+    {"name":"setEventExample","parameterTypes":["java.lang.String"] }, 
     {"name":"setEventName","parameterTypes":["java.lang.String"] }, 
+    {"name":"setTopicCDCSource","parameterTypes":["java.lang.String"] }, 
     {"name":"setTopicCategory","parameterTypes":["java.lang.String"] }, 
-    {"name":"setTopicConfidentiality","parameterTypes":["java.lang.String"] }, 
+    {"name":"setTopicConfidentialityData","parameterTypes":["java.lang.String"] }, 
     {"name":"setTopicDescription","parameterTypes":["java.lang.String"] }, 
     {"name":"setTopicPlatform","parameterTypes":["java.lang.String"] }, 
-    {"name":"setTopicSourceTableCDC","parameterTypes":["java.lang.String"] }, 
     {"name":"setTopicStatus","parameterTypes":["java.lang.String"] }, 
     {"name":"setTopicType","parameterTypes":["java.lang.String"] }
   ]
@@ -146,7 +146,7 @@
   ]
 },
 {
-  "name":"es.santander.marketplace.client.model.topic.Schema",
+  "name":"es.santander.marketplace.client.model.topic.Schemas",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
@@ -168,7 +168,7 @@
     {"name":"setMetadata","parameterTypes":["es.santander.marketplace.client.model.topic.Metadata"] }, 
     {"name":"setName","parameterTypes":["java.lang.String"] }, 
     {"name":"setProducers","parameterTypes":["java.util.List"] }, 
-    {"name":"setSchemas","parameterTypes":["es.santander.marketplace.client.model.topic.Schema"] }
+    {"name":"setSchemas","parameterTypes":["es.santander.marketplace.client.model.topic.Schemas"] }
   ]
 },
 {
