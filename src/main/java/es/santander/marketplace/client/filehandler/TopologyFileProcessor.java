@@ -2,6 +2,7 @@ package es.santander.marketplace.client.filehandler;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
@@ -80,11 +81,14 @@ public class TopologyFileProcessor {
                 .map(consumer -> subscriptionRequestMapper.toConsumerSubscription(fullyQualifiedTopicName, consumer)).toList();
 
         createJsonFile(topicFolder + fullyQualifiedTopicName, topicRegistration);
-        if (topic.getSchemas() != null) {
-            createSubjectSchemaFilePathFile(topicFolder + fullyQualifiedTopicName + "--schema.txt", topic.getSchemas().getSchemaFile());
+        if (topic.getSchemas() != null
+                && topic.getSchemas().getSchemaFile() != null
+                && !topic.getSchemas().getSchemaFile().isEmpty()
+                && !topic.getSchemas().getSchemaFile().isBlank()) {
+            createSubjectSchemaFilePathFile(topicFolder + fullyQualifiedTopicName + "--schema.avsc", topic.getSchemas().getSchemaFile());
         }
 
-        if (!topic.getMetadata().getEventExample().isBlank() && !topic.getMetadata().getEventExample().isEmpty()) {
+        if (topic.getMetadata().getEventExample() != null && !topic.getMetadata().getEventExample().isBlank() && !topic.getMetadata().getEventExample().isEmpty()) {
             createJsonFile(topicFolder + fullyQualifiedTopicName + "--example", topic.getMetadata().getEventExample());
         }
 
@@ -104,7 +108,11 @@ public class TopologyFileProcessor {
 
     private void createSubjectSchemaFilePathFile(String filename, String path) {
         try {
-            Files.write(Paths.get(filename), path.getBytes());
+            Path filePath = Paths.get(path);
+            if (Files.exists(filePath)) {
+                byte[] fileBytes = Files.readAllBytes(filePath);
+                Files.write(Paths.get(filename), fileBytes);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

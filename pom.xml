@@ -3,7 +3,7 @@
   <groupId>es.santander.marketplace.client</groupId>
   <artifactId>marketplace-client</artifactId>
   <packaging>jar</packaging>
-  <version>0.1.0</version>
+  <version>0.1.1</version>
   <name>marketplace-client</name>
   <inceptionYear>2022</inceptionYear>
   <url>https://github.com/ogomezso/marketplace-client</url>

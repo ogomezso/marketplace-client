@@ -448,6 +448,14 @@
   "queryAllDeclaredMethods":true
 },
 {
+  "name":"org.glassfish.jersey.client.DefaultClientAsyncExecutorProvider",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.glassfish.jersey.client.DefaultClientBackgroundSchedulerProvider",
+  "queryAllDeclaredMethods":true
+},
+{
   "name":"org.glassfish.jersey.inject.hk2.ContextInjectionResolverImpl",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
@@ -673,6 +681,20 @@
   "name":"org.glassfish.jersey.process.internal.RequestScope",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.glassfish.jersey.spi.AbstractThreadPoolProvider",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.glassfish.jersey.spi.ScheduledThreadPoolExecutorProvider",
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"preDestroy","parameterTypes":[] }]
+},
+{
+  "name":"org.glassfish.jersey.spi.ThreadPoolExecutorProvider",
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"preDestroy","parameterTypes":[] }]
 },
 {
   "name":"org.jvnet.hk2.internal.DynamicConfigurationServiceImpl",
