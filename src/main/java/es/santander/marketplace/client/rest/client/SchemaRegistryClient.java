@@ -19,10 +19,17 @@ public class SchemaRegistryClient {
   public SchemaResponse getSchemaInfo(AppConfig appConfig, String subject) {
 
     String targetUrl = appConfig.getSchemaRegistryUrl() + "/subjects/" + subject + "/versions/latest";
-    return createSchemaRegistryClient(appConfig).target(targetUrl)
-        .request(MediaType.APPLICATION_JSON)
-        .accept(MediaType.APPLICATION_JSON)
-        .get(SchemaResponse.class);
+    SchemaResponse response;
+    try {
+      response = createSchemaRegistryClient(appConfig).target(targetUrl)
+              .request(MediaType.APPLICATION_JSON)
+              .accept(MediaType.APPLICATION_JSON)
+              .get(SchemaResponse.class);
+    } catch (Exception e) {
+      System.out.println("Error getting subject from Schema Registry");
+      response = SchemaResponse.builder().build();
+    }
+    return response;
   }
 
   private Client createSchemaRegistryClient(AppConfig appConfig) {

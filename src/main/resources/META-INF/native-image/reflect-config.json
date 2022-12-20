@@ -233,20 +233,6 @@
   ]
 },
 {
-  "name":"es.santander.marketplace.client.rest.model.SchemaResponse",
-  "allDeclaredFields":true,
-  "queryAllDeclaredMethods":true,
-  "queryAllDeclaredConstructors":true,
-  "methods":[
-    {"name":"<init>","parameterTypes":[] }, 
-    {"name":"setId","parameterTypes":["java.lang.Integer"] }, 
-    {"name":"setSchema","parameterTypes":["java.lang.String"] }, 
-    {"name":"setSchemaType","parameterTypes":["java.lang.String"] }, 
-    {"name":"setSubject","parameterTypes":["java.lang.String"] }, 
-    {"name":"setVersion","parameterTypes":["java.lang.Integer"] }
-  ]
-},
-{
   "name":"es.santander.marketplace.client.rest.model.Subscription",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,

@@ -47,7 +47,7 @@ public class RegisterRequestMapper {
         return ApiTopic.builder()
                 .topicName(topic.getName())
                 .topicDescription(topic.getMetadata().getTopicDescription())
-                .topicFormData(mapToFormData(schema.getSchemaType().toUpperCase()))
+                .topicFormData(mapToFormData(Optional.ofNullable(schema.getSchemaType()).orElse("").toUpperCase()))
                 .topicCreationDate(getNowDateAsString()).topicType(
                         mapTopicType(topic.getMetadata().getTopicType().toUpperCase()))
                 .topicConfidentialityData(
