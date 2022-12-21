@@ -18,4 +18,7 @@ public class Schemas {
     private String schemaFile;
     @JsonProperty("value.compatibility")
     private String compatibility;
+
+    @JsonProperty("value.format")
+    private String format;
 }

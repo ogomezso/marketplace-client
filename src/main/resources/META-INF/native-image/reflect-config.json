@@ -153,6 +153,7 @@
   "methods":[
     {"name":"<init>","parameterTypes":[] }, 
     {"name":"setCompatibility","parameterTypes":["java.lang.String"] }, 
+    {"name":"setFormat","parameterTypes":["java.lang.String"] }, 
     {"name":"setSchemaFile","parameterTypes":["java.lang.String"] }
   ]
 },
@@ -695,6 +696,9 @@
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
   "methods":[{"name":"<init>","parameterTypes":["org.glassfish.hk2.api.ServiceLocator"] }]
+},
+{
+  "name":"org.osgi.framework.BundleReference"
 },
 {
   "name":"sun.security.pkcs12.PKCS12KeyStore",

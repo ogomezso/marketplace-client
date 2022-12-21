@@ -47,7 +47,7 @@ public class RegisterRequestMapper {
         return ApiTopic.builder()
                 .topicName(topic.getName())
                 .topicDescription(topic.getMetadata().getTopicDescription())
-                .topicFormData(mapToFormData(Optional.ofNullable(schema.getSchemaType()).orElse("").toUpperCase()))
+                .topicFormData(mapToFormData(topic, schema))
                 .topicCreationDate(getNowDateAsString()).topicType(
                         mapTopicType(topic.getMetadata().getTopicType().toUpperCase()))
                 .topicConfidentialityData(
@@ -63,7 +63,18 @@ public class RegisterRequestMapper {
                 .topicCDCsourceTable(topic.getMetadata().getTopicCDCSource()).build();
     }
 
-    private Integer mapToFormData(String schemaType) {
+    private Integer mapToFormData(Topic topic, SchemaResponse schema) {
+        var schemaType = "";
+        Schemas topicSchema = Optional.ofNullable(topic.getSchemas()).orElse(Schemas.builder().build());
+        if (schema.getSchemaType() != null
+                && !schema.getSchemaType().isEmpty()
+                && !schema.getSchemaType().isBlank()) {
+            schemaType = schema.getSchemaType().toUpperCase();
+        } else if (topicSchema.getFormat() != null
+                && !topicSchema.getFormat().isEmpty()
+                && !topicSchema.getFormat().isBlank()){
+            schemaType = topicSchema.getFormat().toUpperCase();
+        }
         return switch (schemaType) {
             case "JSON" -> 0;
             case "AVRO" -> 1;
