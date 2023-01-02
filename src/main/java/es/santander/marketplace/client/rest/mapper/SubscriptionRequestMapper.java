@@ -5,6 +5,7 @@ import es.santander.marketplace.client.model.topic.Producer;
 import es.santander.marketplace.client.rest.model.Subscription;
 
 import java.util.List;
+import java.util.Optional;
 
 public class SubscriptionRequestMapper {
 
@@ -19,7 +20,7 @@ public class SubscriptionRequestMapper {
         .appkey(extractAppKey(consumer.getPrincipal()))
         .topicName(topicName)
         .subtType(CONSUMER)
-        .subtConsumerGroup(consumer.getGroup())
+        .subtConsumerGroup(Optional.ofNullable(consumer.getGroup()).orElse(""))
         .build();
     }
 
@@ -28,11 +29,13 @@ public class SubscriptionRequestMapper {
         .appkey(extractAppKey(producer.getPrincipal()))
         .topicName(topicName)
         .subtType(PRODUCER)
-        .subtConsumerGroup("NA")
+        .subtConsumerGroup("")
         .build();
     }
 
     private String extractAppKey(String principal) {
-        return principal.substring(principal.indexOf("_")+1);
+        String[] principalChunks =  principal.split("_");
+
+        return principalChunks[1];
     }
 }

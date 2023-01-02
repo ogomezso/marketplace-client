@@ -101,7 +101,6 @@
   "queryAllDeclaredConstructors":true,
   "methods":[
     {"name":"<init>","parameterTypes":[] }, 
-    {"name":"setGroup","parameterTypes":["java.lang.String"] }, 
     {"name":"setPrincipal","parameterTypes":["java.lang.String"] }
   ]
 },
@@ -195,7 +194,7 @@
     {"name":"getTopicConfidentialityData","parameterTypes":[] }, 
     {"name":"getTopicCreationDate","parameterTypes":[] }, 
     {"name":"getTopicDescription","parameterTypes":[] }, 
-    {"name":"getTopicFormData","parameterTypes":[] }, 
+    {"name":"getTopicFormatData","parameterTypes":[] }, 
     {"name":"getTopicIdApplication","parameterTypes":[] }, 
     {"name":"getTopicName","parameterTypes":[] }, 
     {"name":"getTopicPartitions","parameterTypes":[] }, 
@@ -696,9 +695,6 @@
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
   "methods":[{"name":"<init>","parameterTypes":["org.glassfish.hk2.api.ServiceLocator"] }]
-},
-{
-  "name":"org.osgi.framework.BundleReference"
 },
 {
   "name":"sun.security.pkcs12.PKCS12KeyStore",

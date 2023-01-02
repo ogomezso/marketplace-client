@@ -9,7 +9,7 @@ public class ApiTopic {
     private Integer topicCodeId;
     private String topicName;
     private String topicDescription;
-    private Integer topicFormData;
+    private Integer topicFormatData;
     private String topicCreationDate;
     private Integer topicType;
     private Integer topicStatus;

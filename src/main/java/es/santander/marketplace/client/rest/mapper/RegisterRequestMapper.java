@@ -5,7 +5,7 @@ import es.santander.marketplace.client.model.topic.Topic;
 import es.santander.marketplace.client.rest.model.*;
 
 import java.time.Duration;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
@@ -27,7 +27,7 @@ public class RegisterRequestMapper {
                 .eventSchemaId(Optional.ofNullable(schema.getId()).orElse(0))
                 .eventSchemaVersion(Optional.ofNullable(schema.getVersion()).orElse(0))
                 .eventSchemaCompatibility(compatibilityToInt(Optional.ofNullable(julieSchemaInfo.getCompatibility()).orElse("")))
-                .eventDescription(topic.getMetadata().getEventDescription()).topic(toApiTopic(topic,schema))
+                .eventDescription(topic.getMetadata().getEventDescription()).topic(toApiTopic(topic, schema))
                 .build();
     }
 
@@ -47,8 +47,9 @@ public class RegisterRequestMapper {
         return ApiTopic.builder()
                 .topicName(topic.getName())
                 .topicDescription(topic.getMetadata().getTopicDescription())
-                .topicFormData(mapToFormData(topic, schema))
-                .topicCreationDate(getNowDateAsString()).topicType(
+                .topicFormatData(mapToFormatData(topic, schema))
+                .topicCreationDate(getNowDateAsString())
+                .topicType(
                         mapTopicType(topic.getMetadata().getTopicType().toUpperCase()))
                 .topicConfidentialityData(
                         mapTopicConfidentialityData(
@@ -60,10 +61,20 @@ public class RegisterRequestMapper {
                 .topicPlatform(mapTopicPlatform(topic.getMetadata().getTopicPlatform().toUpperCase()))
                 .topicStatus(
                         convertTopicStatusToInteger(topic.getMetadata().getTopicStatus().toUpperCase()))
-                .topicCDCsourceTable(topic.getMetadata().getTopicCDCSource()).build();
+                .topicCDCsourceTable(topic.getMetadata().getTopicCDCSource())
+                .topicCategory(mapTopicCategory(topic.getMetadata().getTopicCategory()))
+                .build();
     }
 
-    private Integer mapToFormData(Topic topic, SchemaResponse schema) {
+    private Integer mapTopicType(String topicType) {
+        return switch (topicType) {
+            case "SYSTEM" -> 1;
+            default -> 0;
+        };
+
+    }
+
+    private Integer mapToFormatData(Topic topic, SchemaResponse schema) {
         var schemaType = "";
         Schemas topicSchema = Optional.ofNullable(topic.getSchemas()).orElse(Schemas.builder().build());
         if (schema.getSchemaType() != null
@@ -72,7 +83,7 @@ public class RegisterRequestMapper {
             schemaType = schema.getSchemaType().toUpperCase();
         } else if (topicSchema.getFormat() != null
                 && !topicSchema.getFormat().isEmpty()
-                && !topicSchema.getFormat().isBlank()){
+                && !topicSchema.getFormat().isBlank()) {
             schemaType = topicSchema.getFormat().toUpperCase();
         }
         return switch (schemaType) {
@@ -100,7 +111,7 @@ public class RegisterRequestMapper {
         };
     }
 
-    private Integer mapTopicType(String topicType) {
+    private Integer mapTopicCategory(String topicType) {
         return (topicType.equals("COMMAND")) ? 1 : 0;
     }
 
@@ -109,11 +120,11 @@ public class RegisterRequestMapper {
     }
 
     private String getNowDateAsString() {
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        return LocalDateTime.now().format(format);
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy'T'HH:mm:ss.SSSSSSZ");
+        return ZonedDateTime.now().format(format);
     }
 
     private Integer convertTopicStatusToInteger(String topicStatus) {
-        return (topicStatus.equals("ACTIVE")) ? 1 : 0;
+        return (topicStatus.equals("ACTIVE")) ? 0 : 1;
     }
 }
