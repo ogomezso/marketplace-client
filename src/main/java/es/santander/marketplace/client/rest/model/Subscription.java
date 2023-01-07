@@ -6,7 +6,7 @@ import lombok.Data;
 @Builder
 @Data
 public class Subscription {
-    String appkey;
+    String appKey;
     String topicName;
     Integer subtCodeId;
     Integer subtAppCodeId;

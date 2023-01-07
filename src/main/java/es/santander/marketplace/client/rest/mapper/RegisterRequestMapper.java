@@ -120,7 +120,7 @@ public class RegisterRequestMapper {
     }
 
     private String getNowDateAsString() {
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy'T'HH:mm:ss.SSSSSSZ");
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ");
         return ZonedDateTime.now().format(format);
     }
 

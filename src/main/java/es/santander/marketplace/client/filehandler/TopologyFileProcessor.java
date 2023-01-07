@@ -2,11 +2,9 @@ package es.santander.marketplace.client.filehandler;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.exc.StreamReadException;
@@ -93,12 +91,12 @@ public class TopologyFileProcessor {
         }
 
         producerSubscriptions.forEach(producer -> createJsonFile(
-                appConfig.getDumpSubscriptionsFilePath() + "PRODUCER" + "_" + producer.getAppkey() + "_"
+                appConfig.getDumpSubscriptionsFilePath() + "PRODUCER" + "_" + producer.getAppKey() + "_"
                         + producer.getTopicName(),
                 producer));
         consumerSubscriptions.forEach(consumer -> createJsonFile(
                 appConfig.getDumpSubscriptionsFilePath() + "CONSUMER" + "_"
-                        + consumer.getAppkey() + "_" + consumer.getTopicName() + "_" + consumer.getSubtConsumerGroup(),
+                        + consumer.getAppKey() + "_" + consumer.getTopicName() + "_" + consumer.getSubtConsumerGroup(),
                 consumer));
     }
 

@@ -4,7 +4,6 @@ import es.santander.marketplace.client.model.topic.Consumer;
 import es.santander.marketplace.client.model.topic.Producer;
 import es.santander.marketplace.client.rest.model.Subscription;
 
-import java.util.List;
 import java.util.Optional;
 
 public class SubscriptionRequestMapper {
@@ -17,7 +16,7 @@ public class SubscriptionRequestMapper {
     public Subscription toConsumerSubscription(String topicName, Consumer consumer){
 
         return Subscription.builder()
-        .appkey(extractAppKey(consumer.getPrincipal()))
+        .appKey(extractAppKey(consumer.getPrincipal()))
         .topicName(topicName)
         .subtType(CONSUMER)
         .subtConsumerGroup(Optional.ofNullable(consumer.getGroup()).orElse(""))
@@ -26,7 +25,7 @@ public class SubscriptionRequestMapper {
 
     public Subscription toProducerSubscription(String topicName, Producer producer){
         return Subscription.builder()
-        .appkey(extractAppKey(producer.getPrincipal()))
+        .appKey(extractAppKey(producer.getPrincipal()))
         .topicName(topicName)
         .subtType(PRODUCER)
         .subtConsumerGroup("")

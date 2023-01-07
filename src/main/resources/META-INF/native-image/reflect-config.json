@@ -238,7 +238,7 @@
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
   "methods":[
-    {"name":"getAppkey","parameterTypes":[] }, 
+    {"name":"getAppKey","parameterTypes":[] }, 
     {"name":"getSubtAppCodeId","parameterTypes":[] }, 
     {"name":"getSubtCodeId","parameterTypes":[] }, 
     {"name":"getSubtConsumerGroup","parameterTypes":[] }, 
